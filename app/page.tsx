@@ -10,10 +10,13 @@ export default function Home() {
 
     const snapshot = query(collection(firestore, "pantry"))
     const docs = await getDocs(snapshot)
+    const pantryList = []
     docs.forEach(doc => {
-      console.log(doc.id, doc.data())
-    });
+      pantryList.push(doc.id)
+    })
+    console.log(pantryList)
     }
+    updatePantry()
   }, [])
   return <Box
   width={"100%"}
