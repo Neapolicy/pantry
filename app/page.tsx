@@ -1,10 +1,10 @@
 'use client'
 import { Box, Stack, Typography } from "@mui/material";
 import {firestore, collection, query, getDocs} from "@/firebase.js"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-const items = ["tomato", "potato", "onion", "garlic", "ginger", "carrot", "lettuce", "kale", "cucumber"]
 export default function Home() {
+  const [pantry, setPantry] = useState([])
   useEffect(() => {
     const updatePantry = async () => {
 
@@ -15,6 +15,7 @@ export default function Home() {
       pantryList.push(doc.id)
     })
     console.log(pantryList)
+    setPantry(pantryList) //ignore the red errors here, idk why it appears
     }
     updatePantry()
   }, [])
@@ -42,7 +43,7 @@ export default function Home() {
     height={"400px"}
     spacing = {2}
     overflow={"auto"}>
-      {items.map((i) => (
+      {pantry.map((i) => (
         <Box
         key={i}
         width={"100%"}
